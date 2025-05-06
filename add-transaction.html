@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Transaction - Paisa Planner</title>
+    <style>
+        /* Import Poppins Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #fdfbfb, #ebedee);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Transaction Card */
+        .transaction-card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            color: #333;
+            position: relative;
+            text-align: center;
+            animation: fadeInScale 0.8s ease-in-out;
+        }
+
+        /* Card Animation */
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .transaction-card h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #6a82fb;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .transaction-card h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #fc5c7d;
+            margin: 10px auto 0;
+            border-radius: 3px;
+        }
+
+        .transaction-card form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-input {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .form-input label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6a82fb;
+            margin-bottom: 5px;
+        }
+
+        .form-input input,
+        .form-input select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-input input:focus,
+        .form-input select:focus {
+            border-color: #6a82fb;
+            box-shadow: 0 0 8px rgba(106, 130, 251, 0.5);
+        }
+
+        .transaction-card button {
+            padding: 12px;
+            background: linear-gradient(to right, #6a82fb, #fc5c7d);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .transaction-card button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(252, 92, 125, 0.4);
+        }
+
+        .back-link {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back-link a {
+            color: #6a82fb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #fc5c7d;
+        }
+
+        /* Decorative Circles */
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .circle1 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(to bottom right, #fc5c7d, #6a82fb);
+            top: -50px;
+            left: -50px;
+        }
+
+        .circle2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(to bottom right, #6a82fb, #fc5c7d);
+            bottom: -70px;
+            right: -70px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .transaction-card {
+                padding: 20px;
+            }
+
+            .transaction-card h1 {
+                font-size: 24px;
+            }
+
+            .transaction-card button {
+                font-size: 14px;
+            }
+
+            .circle1 {
+                width: 100px;
+                height: 100px;
+            }
+
+            .circle2 {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-circle circle1"></div>
+    <div class="decorative-circle circle2"></div>
+
+    <div class="transaction-card">
+        <h1>Add Transaction</h1>
+        <form id="transactionForm" method="POST" action="{{ url_for('add_transaction') }}">
+            <div class="form-input">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required placeholder="Enter transaction title">
+            </div>
+            <div class="form-input">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" name="amount" required placeholder="Enter amount">
+            </div>
+            <div class="form-input">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                    <option value="savings">Savings</option>
+                </select>
+            </div>
+            <div class="form-input">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <button type="submit">Add Transaction</button>
+            <div class="back-link">
+                <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+            </div>
+        </form>
+    </div>
+        </form>
+    </div>
+</body>
+</html>

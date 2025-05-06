@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Paisa Planner</title>
+    <style>
+        /* Import Poppins Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Background Animation */
+        @keyframes gradientBackground {
+            0% { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
+            25% { background: linear-gradient(135deg, #f3e7e9, #e3eeff); }
+            50% { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
+            75% { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+            100% { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
+        }
+
+        body {
+            animation: gradientBackground 10s infinite alternate;
+        }
+
+        /* Registration Card */
+        .register-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            color: #333;
+            text-align: center;
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Card Animation */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .register-card h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #66a6ff;
+            margin-bottom: 25px;
+            animation: fadeInTitle 1.5s ease-in;
+        }
+
+        /* Title Animation */
+        @keyframes fadeInTitle {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .register-card form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-input {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .form-input label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #66a6ff;
+            margin-bottom: 5px;
+        }
+
+        .form-input input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-input input:focus {
+            border-color: #66a6ff;
+            box-shadow: 0 0 8px rgba(102, 166, 255, 0.5);
+        }
+
+        .register-card button {
+            padding: 12px;
+            background: #66a6ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            outline: none;
+        }
+
+        .register-card button:hover {
+            background: #89c9ff;
+            transform: scale(1.05);
+        }
+
+        .register-card .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .register-card .login-link a {
+            color: #66a6ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .register-card .login-link a:hover {
+            color: #89c9ff;
+        }
+
+        /* Floating Background Dots */
+        .floating-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-50px);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+        }
+
+        .dot:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            top: 30%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .dot:nth-child(3) {
+            top: 50%;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        .dot:nth-child(4) {
+            top: 70%;
+            left: 60%;
+            animation-delay: 1s;
+        }
+
+        .dot:nth-child(5) {
+            top: 90%;
+            left: 30%;
+            animation-delay: 3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .register-card {
+                padding: 20px;
+            }
+
+            .register-card h1 {
+                font-size: 24px;
+            }
+
+            .register-card button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <div class="register-card">
+        <h1>Create an Account</h1>
+        <form id="registerForm" method="POST" action="/register">
+            <div class="form-input">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-input">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-input">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Create a password">
+            </div>
+            <div class="form-input">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required placeholder="Re-enter your password">
+            </div>
+            <button type="submit">Register</button>
+            <div class="login-link">
+                Already have an account? <a href="index.html">Login</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

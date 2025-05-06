@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Paisa Planner</title>
+    <style>
+        /* Import Poppins Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        @keyframes gradientBackground {
+            0% { background: linear-gradient(135deg, #ff758c, #ff7eb3); }
+            25% { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
+            50% { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
+            75% { background: linear-gradient(135deg, #f3e7e9, #e3eeff); }
+            100% { background: linear-gradient(135deg, #ff758c, #ff7eb3); }
+        }
+
+        body {
+            animation: gradientBackground 12s infinite alternate;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff758c;
+            padding: 20px 30px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 1s ease-out;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        /* Header Animation */
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            padding: 20px 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #ff758c;
+            font-weight: 600;
+        }
+
+        .transactions {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .transactions li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .transactions li:last-child {
+            border-bottom: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff758c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: #ff7eb3;
+            transform: scale(1.05);
+        }
+
+        .chart-container {
+            text-align: center;
+        }
+
+        .chart {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Animation for Cards */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Dots for Background */
+        .floating-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .dot:nth-child(1) {
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            top: 25%;
+            left: 60%;
+            animation-delay: 2s;
+        }
+
+        .dot:nth-child(3) {
+            top: 50%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .dot:nth-child(4) {
+            top: 70%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .dot:nth-child(5) {
+            top: 85%;
+            left: 40%;
+            animation-delay: 3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .card {
+                padding: 15px;
+            }
+
+            .card h2 {
+                font-size: 18px;
+            }
+
+            .btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <div class="header">
+        <h1>Paisa Planner Dashboard</h1>
+    </div>
+    <div class="container">
+        <!-- Budget Summary -->
+        <div class="card">
+            <h2>Budget Overview</h2>
+            <p>Remaining Budget: <strong>${{ remaining_budget }}</strong></p>
+            <p>Total Income: <strong>${{ total_income }}</strong></p>
+            <p>Total Expenses: <strong>${{ total_expenses }}</strong></p>
+            <a href="{{ url_for('set_budget') }}" class="btn">Set Budget</a>
+        </div>
+        
+        <div class="card">
+            <h2>Recent Transactions</h2>
+            <ul class="transactions">
+                {% if transactions %}
+                    {% for transaction in transactions %}
+                    <li>
+                        <span>{{ transaction["date"] }}</span>
+                        <span>{{ transaction["title"] }}</span>
+                        <span>{{ transaction["category"] }}</span>
+                        <span>${{ transaction["amount"] }}</span>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No transactions found.</p>
+                {% endif %}
+            </ul>
+            <a href="{{ url_for('add_transaction') }}" class="btn">Add Transaction</a>
+        </div>
+        
+        <div class="card chart-container">
+            <h2>Spending Chart</h2>
+            <canvas id="spendingChart" class="chart"></canvas>
+        </div>
+        
+        <!-- Add Reports Button -->
+        <div class="card">
+            <a href="{{ url_for('reports') }}" class="btn">View Reports</a>
+        </div>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const ctx = document.getElementById("spendingChart").getContext("2d");
+                const chartLabels = {{ chart_labels|safe }};
+                const chartValues = {{ chart_values|safe }};
+        
+                new Chart(ctx, {
+                    type: "doughnut",
+                    data: {
+                        labels: chartLabels,
+                        datasets: [{
+                            data: chartValues,
+                            backgroundColor: ["#ff758c", "#ff7eb3", "#fad0c4", "#a6c1ee", "#89f7fe"]
+                        }]
+                    }
+                });
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

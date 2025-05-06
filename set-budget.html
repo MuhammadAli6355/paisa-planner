@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Budget - Paisa Planner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: #333;
+        }
+        .budget-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+        }
+        .budget-card h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ff758c;
+            margin-bottom: 20px;
+        }
+        .budget-card form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .budget-card input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+        }
+        .budget-card button {
+            padding: 10px;
+            background: #ff758c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="budget-card">
+        <h1>Set Your Budget</h1>
+        <form method="POST">
+            <input type="number" name="budget" placeholder="Enter your budget" required>
+            <button type="submit">Save Budget</button>
+        </form>
+    </div>
+</body>
+</html>
